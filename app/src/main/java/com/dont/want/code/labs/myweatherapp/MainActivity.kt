@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -16,7 +15,6 @@ import java.lang.Exception
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.min
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //Remove title bar
-//        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         setContentView(R.layout.activity_main)
 
@@ -85,6 +83,12 @@ class MainActivity : AppCompatActivity() {
 
                 val tempString = mainData.getString("temp") + "°C"
                 findViewById<TextView>(R.id.temp).text = tempString
+
+                val feelsLike = mainData.getDouble("feels_like")
+                val feelsLikeString = "Feels like " + feelsLike.toString() + "°C"
+                findViewById<TextView>(R.id.feels_like).text = feelsLikeString
+
+
 
                 val windSpeed = windData.getDouble("speed")
                 val windSpeedString = windSpeed.toString() + " m/s"
