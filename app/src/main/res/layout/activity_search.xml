@@ -7,7 +7,21 @@
     android:background="@drawable/gradient_background"
     tools:context=".SearchActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/search_container"
+        app:layout_constraintStart_toStartOf="@+id/search_container"
+        app:layout_constraintTop_toTopOf="@+id/search_container" />
+
     <LinearLayout
+        android:id="@+id/search_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/gradient_background"
@@ -27,14 +41,13 @@
                 android:layout_height="48dp"
                 android:layout_margin="10dp"
                 android:layout_weight="1"
-                android:autofillHints=""
-                android:ems="010"
+                android:ems="10"
                 android:hint="City Search"
                 android:inputType="textShortMessage|textAutoComplete"
                 android:padding="10dp" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/CityList"
+                android:id="@+id/city_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
