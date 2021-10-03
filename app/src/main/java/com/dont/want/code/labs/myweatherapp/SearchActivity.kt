@@ -19,6 +19,8 @@ class SearchActivity : AppCompatActivity() {
     lateinit var progressBar: ProgressBar
     lateinit var searchContainer:LinearLayout
     lateinit var cityData: JSONArray
+    lateinit var cityObjectArray: ArrayList<City>
+    lateinit var adapter: CityAdapter
 
     data class City(val name:String, val temp: Double, val humidity:Int, val wind:Double){}
 
@@ -53,16 +55,23 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                Toast.makeText(this@SearchActivity, "new text: " + p0, Toast.LENGTH_SHORT).show()
+                try{
+                    val currentCityData = cityObjectArray.filter {
+                            city -> city.name.lowercase().contains(p0.toString().lowercase()!!)
+                    } as ArrayList<City>
+                    cityRecyclerView.swapAdapter(CityAdapter(currentCityData), false)
+                }
+                finally {
+                }
             }
         })
 
 
 
-        val cityStrings = ArrayList<City>()
+        cityObjectArray = ArrayList<City>()
         for (i in 0 until cityData.length()){
             val city:JSONObject = cityData[i] as JSONObject
-            cityStrings.add(
+            cityObjectArray.add(
                 City(
                     city.getString("name"),
                     0.0,
@@ -72,11 +81,10 @@ class SearchActivity : AppCompatActivity() {
             )
         }
 
-        cityRecyclerView.adapter = CityAdapter(cityStrings)
+        adapter = CityAdapter(cityObjectArray)
+        cityRecyclerView.adapter = adapter
         cityRecyclerView.setHasFixedSize(true)
         cityRecyclerView.setLayoutManager(LinearLayoutManager(this))
-
-
     }
 
 
