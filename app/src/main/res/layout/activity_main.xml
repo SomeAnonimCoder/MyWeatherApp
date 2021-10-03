@@ -55,8 +55,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Status"
+                android:textAlignment="center"
                 android:textColor="#EEEEEE"
-                android:textSize="18sp" />
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/temp"
