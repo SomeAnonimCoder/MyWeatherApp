@@ -18,7 +18,7 @@ import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class CurrentActivity : AppCompatActivity() {
 
     var cityID:Int=0
     val apiKey:String = "42af006c49cad6fb2ae56af9fd967928"
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_current)
 
         supportActionBar?.hide()
 

@@ -124,7 +124,7 @@ class SearchActivity : AppCompatActivity() {
                 itemView.setOnClickListener{
                     val intent = Intent(
                         it.context,
-                        MainActivity::class.java
+                        CurrentActivity::class.java
                     )
                     intent.putExtra("city_id", id)
                     startActivity(it.context, intent, null)

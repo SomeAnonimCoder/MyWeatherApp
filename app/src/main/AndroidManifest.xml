@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyWeatherApp">
         <activity
+            android:name=".ForecastActivity"
+            android:exported="true" />
+        <activity
             android:name=".SearchActivity"
             android:exported="true">
             <intent-filter>
@@ -21,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".CurrentActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
