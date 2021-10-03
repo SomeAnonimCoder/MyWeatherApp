@@ -1,19 +1,20 @@
 package com.dont.want.code.labs.myweatherapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.*
-import androidx.core.app.ActivityCompat.startActivityForResult
+import android.view.*
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
-import androidx.recyclerview.widget.LinearLayoutManager
 import org.json.JSONObject
 
 
@@ -25,9 +26,21 @@ class SearchActivity : AppCompatActivity() {
     lateinit var cityObjectArray: ArrayList<City>
     lateinit var adapter: CityAdapter
 
-    data class City(val id:Int, val name:String, val temp: Double, val humidity:Int, val wind:Double){}
+    data class City(val id:Int, val name:String, val country:String, val lon:Int, val lat:Int)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // lock orientation
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        // make activity fullscreen TODO deprecated, find newer method
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
 
@@ -48,6 +61,7 @@ class SearchActivity : AppCompatActivity() {
         progressBar.visibility = View.GONE
         searchContainer.visibility = View.VISIBLE
 
+        supportActionBar?.hide()
 
         searchTextEdit.addTextChangedListener(object : TextWatcher {
 
@@ -60,7 +74,7 @@ class SearchActivity : AppCompatActivity() {
             override fun afterTextChanged(p0: Editable?) {
                 try {
                     val currentCityData = cityObjectArray.filter { city ->
-                        city.name.lowercase().contains(p0.toString().lowercase()!!)
+                        city.name.lowercase().contains(p0.toString().lowercase())
                     } as ArrayList<City>
                     cityRecyclerView.swapAdapter(CityAdapter(currentCityData), false)
                 } finally {
@@ -77,9 +91,9 @@ class SearchActivity : AppCompatActivity() {
                 City(
                     city.getInt("id"),
                     city.getString("name"),
-                    0.0,
-                    0,
-                    0.0
+                    city.getString("country"),
+                    city.getJSONObject("coord").getDouble("lat").toInt(),
+                    city.getJSONObject("coord").getDouble("lon").toInt()
                 )
             )
         }
@@ -87,7 +101,7 @@ class SearchActivity : AppCompatActivity() {
         adapter = CityAdapter(cityObjectArray)
         cityRecyclerView.adapter = adapter
         cityRecyclerView.setHasFixedSize(true)
-        cityRecyclerView.setLayoutManager(LinearLayoutManager(this))
+        cityRecyclerView.layoutManager = LinearLayoutManager(this)
 
     }
 
@@ -101,15 +115,15 @@ class SearchActivity : AppCompatActivity() {
          */
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val name = view.findViewById<TextView>(R.id.listitem_city_name)
-            val temp = view.findViewById<TextView>(R.id.listitem_temp)
-            val hum = view.findViewById<TextView>(R.id.listitem_humidity)
-            val wind = view.findViewById<TextView>(R.id.listitem_wind)
+            val lon = view.findViewById<TextView>(R.id.listitem_lon)
+            val country = view.findViewById<TextView>(R.id.listitem_country)
+            val lat = view.findViewById<TextView>(R.id.listitem_lat)
             var id=0
 
             init {
                 itemView.setOnClickListener{
                     val intent = Intent(
-                        it.getContext(),
+                        it.context,
                         MainActivity::class.java
                     )
                     intent.putExtra("city_id", id)
@@ -133,9 +147,9 @@ class SearchActivity : AppCompatActivity() {
                 // Get element from your dataset at this position and replace the
                 // contents of the view with that element
                 viewHolder.name.text = dataSet[position].name
-                viewHolder.hum.text = dataSet[position].humidity.toString() + " %"
-                viewHolder.temp.text = dataSet[position].temp.toString() + "°C"
-                viewHolder.wind.text = dataSet[position].wind.toString() + "m/s"
+                viewHolder.country.text = dataSet[position].country.toString()
+                viewHolder.lon.text = dataSet[position].lon.toString()
+                viewHolder.lat.text = dataSet[position].lat.toString()
                 viewHolder.id = dataSet[position].id
             }
 

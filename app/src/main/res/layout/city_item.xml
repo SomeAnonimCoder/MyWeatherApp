@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_weight="1"
     android:gravity="center_vertical">
 
     <LinearLayout
@@ -12,12 +13,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/listitem_city_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="Mosccow"
                 android:textColor="#EEEEEE"
                 android:textSize="30sp" />
@@ -39,10 +43,10 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    app:srcCompat="@drawable/temp" />
+                    app:srcCompat="@drawable/lon" />
 
                 <TextView
-                    android:id="@+id/listitem_temp"
+                    android:id="@+id/listitem_lon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TextView" />
@@ -63,10 +67,10 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    app:srcCompat="@drawable/wind" />
+                    app:srcCompat="@drawable/lat" />
 
                 <TextView
-                    android:id="@+id/listitem_wind"
+                    android:id="@+id/listitem_lat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TextView" />
@@ -88,10 +92,10 @@
                     android:id="@+id/imageView"
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    app:srcCompat="@drawable/humidity" />
+                    app:srcCompat="@drawable/country" />
 
                 <TextView
-                    android:id="@+id/listitem_humidity"
+                    android:id="@+id/listitem_country"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="TextView" />
