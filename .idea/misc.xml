@@ -6,6 +6,8 @@
         <entry key="app/src/main/res/drawable/gradient_background.xml" value="0.1814814814814815" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.48756218905472637" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/city_item.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/text_row_item.xml" value="0.1" />
       </map>
     </option>
   </component>
