@@ -1,5 +1,6 @@
 package com.dont.want.code.labs.myweatherapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import org.json.JSONArray
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +25,7 @@ class SearchActivity : AppCompatActivity() {
     lateinit var cityObjectArray: ArrayList<City>
     lateinit var adapter: CityAdapter
 
-    data class City(val name:String, val temp: Double, val humidity:Int, val wind:Double){}
+    data class City(val id:Int, val name:String, val temp: Double, val humidity:Int, val wind:Double){}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,13 +58,12 @@ class SearchActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                try{
-                    val currentCityData = cityObjectArray.filter {
-                            city -> city.name.lowercase().contains(p0.toString().lowercase()!!)
+                try {
+                    val currentCityData = cityObjectArray.filter { city ->
+                        city.name.lowercase().contains(p0.toString().lowercase()!!)
                     } as ArrayList<City>
                     cityRecyclerView.swapAdapter(CityAdapter(currentCityData), false)
-                }
-                finally {
+                } finally {
                 }
             }
         })
@@ -69,10 +71,11 @@ class SearchActivity : AppCompatActivity() {
 
 
         cityObjectArray = ArrayList<City>()
-        for (i in 0 until cityData.length()){
-            val city:JSONObject = cityData[i] as JSONObject
+        for (i in 0 until cityData.length()) {
+            val city: JSONObject = cityData[i] as JSONObject
             cityObjectArray.add(
                 City(
+                    city.getInt("id"),
                     city.getString("name"),
                     0.0,
                     0,
@@ -85,8 +88,8 @@ class SearchActivity : AppCompatActivity() {
         cityRecyclerView.adapter = adapter
         cityRecyclerView.setHasFixedSize(true)
         cityRecyclerView.setLayoutManager(LinearLayoutManager(this))
-    }
 
+    }
 
 
     class CityAdapter(private val dataSet: ArrayList<City>) :
@@ -100,34 +103,47 @@ class SearchActivity : AppCompatActivity() {
             val name = view.findViewById<TextView>(R.id.listitem_city_name)
             val temp = view.findViewById<TextView>(R.id.listitem_temp)
             val hum = view.findViewById<TextView>(R.id.listitem_humidity)
-            val  wind = view.findViewById<TextView>(R.id.listitem_wind)
+            val wind = view.findViewById<TextView>(R.id.listitem_wind)
+            var id=0
+
+            init {
+                itemView.setOnClickListener{
+                    val intent = Intent(
+                        it.getContext(),
+                        MainActivity::class.java
+                    )
+                    intent.putExtra("city_id", id)
+                    startActivity(it.context, intent, null)
+                }
+            }
         }
 
-        // Create new views (invoked by the layout manager)
-        override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
-            // Create a new view, which defines the UI of the list item
-            val view = LayoutInflater.from(viewGroup.context)
-                .inflate(R.layout.city_item, viewGroup, false)
+            // Create new views (invoked by the layout manager)
+            override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+                // Create a new view, which defines the UI of the list item
+                val view = LayoutInflater.from(viewGroup.context)
+                    .inflate(R.layout.city_item, viewGroup, false)
 
-            return ViewHolder(view)
+                return ViewHolder(view)
+            }
+
+            // Replace the contents of a view (invoked by the layout manager)
+            override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+
+                // Get element from your dataset at this position and replace the
+                // contents of the view with that element
+                viewHolder.name.text = dataSet[position].name
+                viewHolder.hum.text = dataSet[position].humidity.toString() + " %"
+                viewHolder.temp.text = dataSet[position].temp.toString() + "°C"
+                viewHolder.wind.text = dataSet[position].wind.toString() + "m/s"
+                viewHolder.id = dataSet[position].id
+            }
+
+            // Return the size of your dataset (invoked by the layout manager)
+            override fun getItemCount() = dataSet.size
+
         }
-
-        // Replace the contents of a view (invoked by the layout manager)
-        override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
-
-            // Get element from your dataset at this position and replace the
-            // contents of the view with that element
-            viewHolder.name.text = dataSet[position].name
-            viewHolder.hum.text = dataSet[position].humidity.toString() + " %"
-            viewHolder.temp.text = dataSet[position].temp.toString() + "°C"
-            viewHolder.wind.text = dataSet[position].wind.toString() + "m/s"
-        }
-
-        // Return the size of your dataset (invoked by the layout manager)
-        override fun getItemCount() = dataSet.size
 
     }
 
 
-
-}

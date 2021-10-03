@@ -19,7 +19,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val cityName:String = "Moscow"
+    var cityID:Int=0
     val apiKey:String = "42af006c49cad6fb2ae56af9fd967928"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        cityID = this.intent.getIntExtra("city_id", 0)
+
         weatherTask().execute()
     }
 
@@ -52,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         override fun doInBackground(vararg p0: String?): String? {
             var response:String?
             try {
-                response = URL("https://api.openweathermap.org/data/2.5/weather?q=$cityName&units=metric&appid=$apiKey")
+                response = URL("https://api.openweathermap.org/data/2.5/weather?id=$cityID&units=metric&appid=$apiKey")
                     .readText(Charsets.UTF_8)
                 Log.println(Log.WARN,"STR", response)
             }
