@@ -1,5 +1,6 @@
 package com.dont.want.code.labs.myweatherapp
 
+import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
@@ -26,24 +27,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // lock orientation
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         // make activity fullscreen TODO deprecated, find newer method
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN)
 
         //Remove title bar
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
         setContentView(R.layout.activity_main)
 
-        cityID = this.intent.getIntExtra("city_id", 0)
+        supportActionBar?.hide()
 
+
+        cityID = this.intent.getIntExtra("city_id", 0)
         weatherTask().execute()
     }
 
     // TODO deprecated, find another method
-    inner class weatherTask():AsyncTask<String, Void, String>(){
+    inner class weatherTask :AsyncTask<String, Void, String>(){
         override fun onPreExecute() {
             super.onPreExecute()
             findViewById<ProgressBar>(R.id.loader).visibility= View.VISIBLE
@@ -64,10 +67,11 @@ class MainActivity : AppCompatActivity() {
             return response
             }
 
+        @SuppressLint("CutPasteId")
         override fun onPostExecute(result: String?) {
             try {
                 super.onPostExecute(result)
-                val json = JSONObject(result)
+                val json = JSONObject(result!!)
                 val formatter = SimpleDateFormat("HH:mm", Locale.ENGLISH)
 
                 val mainData = json.getJSONObject("main")
