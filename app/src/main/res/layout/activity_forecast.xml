@@ -50,13 +50,10 @@
                 android:textColor="#EEEEEE"
                 android:textSize="20sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/minutely_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-            </androidx.recyclerview.widget.RecyclerView>
+            <com.jjoe64.graphview.GraphView
+                android:layout_width = "match_parent"
+                android:layout_height = "200dip"
+                android:id = "@+id/graph" />
 
             <TextView
                 android:id="@+id/textView3"

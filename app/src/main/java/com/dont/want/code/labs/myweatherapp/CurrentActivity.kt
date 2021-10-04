@@ -1,6 +1,7 @@
 package com.dont.want.code.labs.myweatherapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import org.json.JSONObject
 import java.lang.Exception
 import java.net.URL
@@ -96,7 +98,6 @@ class CurrentActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.feels_like).text = feelsLikeString
 
 
-
                 val windSpeed = windData.getDouble("speed")
                 val windSpeedString = windSpeed.toString() + " m/s"
                 findViewById<TextView>(R.id.wind).text = windSpeedString
@@ -135,6 +136,17 @@ class CurrentActivity : AppCompatActivity() {
                 findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
                 findViewById<RelativeLayout>(R.id.main_container).visibility = View.VISIBLE
                 findViewById<TextView>(R.id.error_text).visibility = View.GONE
+
+                val moreInfo = findViewById<TextView>(R.id.info)
+                moreInfo.setOnClickListener {
+                    val intent = Intent(
+                        it.context,
+                        ForecastActivity::class.java
+                    )
+                    intent.putExtra("city_id", cityID)
+                    ContextCompat.startActivity(it.context, intent, null)
+                }
+
             }
             catch (e:Exception){
                 findViewById<TextView>(R.id.error_text).visibility = View.GONE
