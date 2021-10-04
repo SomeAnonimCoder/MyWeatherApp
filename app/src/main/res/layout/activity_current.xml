@@ -90,6 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Min temp 42°C"
+                    android:textAlignment="center"
                     android:textColor="#EEEEEE" />
 
                 <Space
@@ -104,6 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Max temp 46°C"
+                    android:textAlignment="center"
                     android:textColor="#EEEEEE" />
 
             </LinearLayout>

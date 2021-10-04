@@ -8,7 +8,7 @@
         <entry key="app/src/main/res/drawable/ic_background.xml" value="0.221875" />
         <entry key="app/src/main/res/drawable/list_items_background.xml" value="0.221875" />
         <entry key="app/src/main/res/layout/activity_current.xml" value="0.42950819672131146" />
-        <entry key="app/src/main/res/layout/activity_forecast.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_forecast.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.48756218905472637" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/city_item.xml" value="0.1" />
