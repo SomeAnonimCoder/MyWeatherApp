@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Location"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="24sp">
 
             </TextView>
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Updated at"
-                android:textColor="#EEEEEE" />
+                android:textColor="@color/text_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -56,7 +56,7 @@
                 android:layout_gravity="center"
                 android:text="Status"
                 android:textAlignment="center"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="26sp" />
 
             <TextView
@@ -66,7 +66,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif-condensed-light"
                 android:text="44°C"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="90sp" />
 
             <TextView
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text=" Feels like 44°C"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="30sp" />
 
             <LinearLayout
@@ -91,7 +91,7 @@
                     android:layout_weight="1"
                     android:text="Min temp 42°C"
                     android:textAlignment="center"
-                    android:textColor="#EEEEEE" />
+                    android:textColor="@color/text_color" />
 
                 <Space
                     android:layout_width="50dp"
@@ -106,7 +106,7 @@
                     android:layout_weight="1"
                     android:text="Max temp 46°C"
                     android:textAlignment="center"
-                    android:textColor="#EEEEEE" />
+                    android:textColor="@color/text_color" />
 
             </LinearLayout>
         </LinearLayout>
@@ -153,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4:20am"
-                    android:textColor="#EEEEEE"
+                    android:textColor="@color/text_color"
                     android:textSize="14sp"></TextView>
             </LinearLayout>
 
@@ -189,7 +189,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4:20am"
-                    android:textColor="#EEEEEE"
+                    android:textColor="@color/text_color"
                     android:textSize="14sp"></TextView>
             </LinearLayout>
 
@@ -225,7 +225,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4:20am"
-                    android:textColor="#EEEEEE"
+                    android:textColor="@color/text_color"
                     android:textSize="14sp"></TextView>
             </LinearLayout>
 
@@ -271,7 +271,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4:20am"
-                    android:textColor="#EEEEEE"
+                    android:textColor="@color/text_color"
                     android:textSize="14sp"></TextView>
             </LinearLayout>
 
@@ -338,7 +338,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4:20am"
-                    android:textColor="#EEEEEE"
+                    android:textColor="@color/text_color"
                     android:textSize="14sp"></TextView>
             </LinearLayout>
 
@@ -365,6 +365,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="All fucked up!"
-        android:textColor="#EEEEEE"
+        android:textColor="@color/text_color"
         android:visibility="gone"></TextView>
 </RelativeLayout>

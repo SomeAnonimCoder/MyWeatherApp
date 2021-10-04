@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Location"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="24sp">
 
             </TextView>
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Updated at"
-                android:textColor="#EEEEEE" />
+                android:textColor="@color/text_color" />
 
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/graph"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hourly forecast"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Daily forecast"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="20sp" />
 
             <androidx.recyclerview.widget.RecyclerView
