@@ -42,9 +42,9 @@
                 android:textColor="#EEEEEE" />
 
             <com.jjoe64.graphview.GraphView
-                android:layout_width = "match_parent"
-                android:layout_height = "200dip"
-                android:id = "@+id/graph" />
+                android:id="@+id/graph"
+                android:layout_width="match_parent"
+                android:layout_height="200dp" />
 
             <TextView
                 android:id="@+id/textView3"
@@ -57,8 +57,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/hourly_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:layout_height="200dp"
+                android:orientation="vertical">
 
             </androidx.recyclerview.widget.RecyclerView>
 
@@ -73,7 +73,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/daily_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="200dp"
                 android:orientation="horizontal">
 
             </androidx.recyclerview.widget.RecyclerView>

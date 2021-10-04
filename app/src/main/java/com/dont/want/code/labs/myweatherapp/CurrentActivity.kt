@@ -148,6 +148,7 @@ class CurrentActivity : AppCompatActivity() {
                     intent.putExtra("lat", coords.getDouble("lat"))
                     intent.putExtra("lon", coords.getDouble("lon"))
                     intent.putExtra("city_name", cityName)
+                    intent.putExtra("country_name", country)
                     ContextCompat.startActivity(it.context, intent, null)
                 }
 
