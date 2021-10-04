@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -82,9 +83,9 @@ class CurrentActivity : AppCompatActivity() {
                 val weatherData = json.getJSONArray("weather").getJSONObject(0)
 
                 val country = sysData.getString("country")
-                val town = json.getString("name")
-                val adressString = country.toString() + " : " + town.toString()
-                findViewById<TextView>(R.id.town).text = adressString
+                val cityName = json.getString("name")
+                val adressString = country.toString() + " : " + cityName.toString()
+                findViewById<TextView>(R.id.city_name).text = adressString
 
                 val updateTime = Date(1000 * json.getLong("dt"))
                 val updatedAtString = "Updated at " + formatter.format(updateTime)
@@ -137,13 +138,16 @@ class CurrentActivity : AppCompatActivity() {
                 findViewById<RelativeLayout>(R.id.main_container).visibility = View.VISIBLE
                 findViewById<TextView>(R.id.error_text).visibility = View.GONE
 
-                val moreInfo = findViewById<TextView>(R.id.info)
+                val moreInfo = findViewById<LinearLayout>(R.id.more_layout)
                 moreInfo.setOnClickListener {
                     val intent = Intent(
                         it.context,
                         ForecastActivity::class.java
                     )
-                    intent.putExtra("city_id", cityID)
+                    val coords = json.getJSONObject("coord")
+                    intent.putExtra("lat", coords.getDouble("lat"))
+                    intent.putExtra("lon", coords.getDouble("lon"))
+                    intent.putExtra("city_name", cityName)
                     ContextCompat.startActivity(it.context, intent, null)
                 }
 

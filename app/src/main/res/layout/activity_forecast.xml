@@ -25,7 +25,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/town"
+                android:id="@+id/city_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Location"
@@ -40,15 +40,6 @@
                 android:layout_height="wrap_content"
                 android:text="Updated at"
                 android:textColor="#EEEEEE" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Minutely forecast"
-                android:textColor="#EEEEEE"
-                android:textSize="20sp" />
 
             <com.jjoe64.graphview.GraphView
                 android:layout_width = "match_parent"
