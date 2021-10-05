@@ -4,9 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.21666666666666667" />
-        <entry key="app/src/main/res/drawable/gradient_background.xml" value="0.1814814814814815" />
+        <entry key="app/src/main/res/drawable/gradient_background.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/ic_background.xml" value="0.221875" />
-        <entry key="app/src/main/res/drawable/list_items_background.xml" value="0.221875" />
+        <entry key="app/src/main/res/drawable/ic_sunrise.xml" value="0.38125" />
+        <entry key="app/src/main/res/drawable/list_items_background.xml" value="0.38125" />
         <entry key="app/src/main/res/layout/activity_current.xml" value="0.42950819672131146" />
         <entry key="app/src/main/res/layout/activity_forecast.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.48756218905472637" />
