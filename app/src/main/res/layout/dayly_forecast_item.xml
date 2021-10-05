@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="6:66"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="30sp" />
 
             <Space
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Raining blood"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -69,7 +69,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6:66"
-                        android:textColor="#EEEEEE"
+                        android:textColor="@color/text_color"
                         android:textSize="20dp" />
 
                     <Space
@@ -94,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6:66"
-                        android:textColor="#EEEEEE"
+                        android:textColor="@color/text_color"
                         android:textSize="20dp" />
                 </LinearLayout>
             </LinearLayout>
@@ -132,7 +132,8 @@
                             android:id="@+id/humidity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="44%" />
+                            android:text="44%"
+                            android:textColor="@color/text_color" />
                     </LinearLayout>
 
                     <Space
@@ -156,7 +157,8 @@
                             android:id="@+id/wind"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="44%" />
+                            android:text="44%"
+                            android:textColor="@color/text_color" />
 
                     </LinearLayout>
 
@@ -179,6 +181,7 @@
 
                         <TextView
                             android:id="@+id/pressure"
+                            android:textColor="@color/text_color"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="44%" />
@@ -204,6 +207,7 @@
 
                         <TextView
                             android:id="@+id/clouds"
+                            android:textColor="@color/text_color"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="44%" />
@@ -229,12 +233,14 @@
 
                         <TextView
                             android:id="@+id/morning"
+                            android:textColor="@color/text_color"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2°C" />
 
                         <TextView
                             android:id="@+id/morning_sl"
+                            android:textColor="@color/text_color"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2°C" />
@@ -259,12 +265,14 @@
 
                         <TextView
                             android:id="@+id/day"
+                            android:textColor="@color/text_color"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2°C" />
 
                         <TextView
                             android:id="@+id/day_sl"
+                            android:textColor="@color/text_color"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2°C" />
@@ -290,12 +298,14 @@
 
                         <TextView
                             android:id="@+id/evening"
+                            android:textColor="@color/text_color"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2°C" />
 
                         <TextView
                             android:id="@+id/evening_sl"
+                            android:textColor="@color/text_color"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2°C" />
@@ -321,12 +331,14 @@
 
                         <TextView
                             android:id="@+id/night"
+                            android:textColor="@color/text_color"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2°C" />
 
                         <TextView
                             android:id="@+id/night_sl"
+                            android:textColor="@color/text_color"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="2°C" />

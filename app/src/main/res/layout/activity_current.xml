@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Location"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="24sp">
 
             </TextView>
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Updated at"
-                android:textColor="#EEEEEE" />
+                android:textColor="@color/text_color" />
         </LinearLayout>
 
         <LinearLayout
@@ -56,7 +56,7 @@
                 android:layout_gravity="center"
                 android:text="Status"
                 android:textAlignment="center"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="26sp" />
 
             <TextView
@@ -66,7 +66,7 @@
                 android:layout_gravity="center"
                 android:fontFamily="sans-serif-condensed-light"
                 android:text="44°C"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="90sp" />
 
             <TextView
@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text=" Feels like 44°C"
-                android:textColor="#EEEEEE"
+                android:textColor="@color/text_color"
                 android:textSize="30sp" />
 
             <LinearLayout
@@ -90,7 +90,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Min temp 42°C"
-                    android:textColor="#EEEEEE" />
+                    android:textAlignment="center"
+                    android:textColor="@color/text_color" />
 
                 <Space
                     android:layout_width="50dp"
@@ -104,7 +105,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Max temp 46°C"
-                    android:textColor="#EEEEEE" />
+                    android:textAlignment="center"
+                    android:textColor="@color/text_color" />
 
             </LinearLayout>
         </LinearLayout>
@@ -132,8 +134,8 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:src="@drawable/sunrise"></ImageView>
 
                 <Space
@@ -141,17 +143,11 @@
                     android:layout_height="wrap_content"></Space>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sunrize"
-                    android:textSize="12sp"></TextView>
-
-                <TextView
                     android:id="@+id/sunrise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4:20am"
-                    android:textColor="#EEEEEE"
+                    android:textColor="@color/text_color"
                     android:textSize="14sp"></TextView>
             </LinearLayout>
 
@@ -168,8 +164,8 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:src="@drawable/sunset"></ImageView>
 
                 <Space
@@ -177,17 +173,11 @@
                     android:layout_height="wrap_content"></Space>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sunset"
-                    android:textSize="12sp"></TextView>
-
-                <TextView
                     android:id="@+id/sunset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4:20am"
-                    android:textColor="#EEEEEE"
+                    android:textColor="@color/text_color"
                     android:textSize="14sp"></TextView>
             </LinearLayout>
 
@@ -204,8 +194,8 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:src="@drawable/humidity"></ImageView>
 
                 <Space
@@ -213,17 +203,11 @@
                     android:layout_height="wrap_content"></Space>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Humidity"
-                    android:textSize="12sp"></TextView>
-
-                <TextView
                     android:id="@+id/humidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4:20am"
-                    android:textColor="#EEEEEE"
+                    android:textColor="@color/text_color"
                     android:textSize="14sp"></TextView>
             </LinearLayout>
 
@@ -237,6 +221,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
             android:weightSum="3">
 
@@ -249,8 +234,8 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:src="@drawable/wind"></ImageView>
 
                 <Space
@@ -258,53 +243,11 @@
                     android:layout_height="wrap_content"></Space>
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="wind"
-                    android:textSize="12sp"></TextView>
-
-                <TextView
                     android:id="@+id/wind"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4:20am"
-                    android:textColor="#EEEEEE"
-                    android:textSize="14sp"></TextView>
-            </LinearLayout>
-
-            <Space
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"></Space>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/info"></ImageView>
-
-                <Space
-                    android:layout_width="5dp"
-                    android:layout_height="wrap_content"></Space>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Info"
-                    android:textSize="12sp"></TextView>
-
-                <TextView
-                    android:id="@+id/info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4:20am"
-                    android:textColor="#EEEEEE"
+                    android:textColor="@color/text_color"
                     android:textSize="14sp"></TextView>
             </LinearLayout>
 
@@ -314,17 +257,18 @@
 
             <LinearLayout
                 android:id="@+id/more_layout"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:background="@drawable/list_items_background"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="8dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:src="@drawable/pressure"></ImageView>
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
+                    android:src="@drawable/info"></ImageView>
 
                 <Space
                     android:layout_width="5dp"
@@ -333,15 +277,38 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pressure"
+                    android:text="Forecast"
                     android:textSize="12sp"></TextView>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="wrap_content"></Space>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
+                    android:src="@drawable/pressure"></ImageView>
+
+                <Space
+                    android:layout_width="5dp"
+                    android:layout_height="wrap_content"></Space>
 
                 <TextView
                     android:id="@+id/pressure"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="4:20am"
-                    android:textColor="#EEEEEE"
+                    android:textColor="@color/text_color"
                     android:textSize="14sp"></TextView>
             </LinearLayout>
 
@@ -368,6 +335,6 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="All fucked up!"
-        android:textColor="#EEEEEE"
+        android:textColor="@color/text_color"
         android:visibility="gone"></TextView>
 </RelativeLayout>
