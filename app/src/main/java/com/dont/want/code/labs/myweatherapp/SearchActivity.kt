@@ -139,15 +139,11 @@ class SearchActivity : AppCompatActivity() {
 
         // class for filling view with data
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            // fields to fill
-            // assert all of them non-null (!!)
-            val name = view.findViewById<TextView>(R.id.listitem_city_name)!!
-            val lon = view.findViewById<TextView>(R.id.listitem_lon)!!
-            val country = view.findViewById<TextView>(R.id.listitem_country)!!
-            val lat = view.findViewById<TextView>(R.id.listitem_lat)!!
-            var id = 0
 
-            // set onClickListener to go to new Weather activity for selected city on click
+            val name = view.findViewById<TextView>(R.id.listitem_city_name)
+            val country = view.findViewById<TextView>(R.id.listitem_country)
+            var id=0
+
             init {
                 itemView.setOnClickListener {
                     val intent = Intent(
@@ -166,21 +162,20 @@ class SearchActivity : AppCompatActivity() {
             val view = LayoutInflater.from(viewGroup.context)
                 .inflate(R.layout.city_item, viewGroup, false)
 
-            return ViewHolder(view)
-        }
 
-        // Replace the contents of a view (invoked by the layout manager)
-        override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+                return ViewHolder(view)
+            }
 
-            // Get element from your dataset at this position and replace the
-            // contents of the view with that element
-            viewHolder.name.text = dataSet[position].name
-            viewHolder.country.text = dataSet[position].country
-            viewHolder.lon.text = dataSet[position].lon.toString()
-            viewHolder.lat.text = dataSet[position].lat.toString()
-            viewHolder.id = dataSet[position].id
-        }
+            // Replace the contents of a view (invoked by the layout manager)
+            override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
 
+                // Get element from your dataset at this position and replace the
+                // contents of the view with that element
+                viewHolder.name.text = dataSet[position].name
+                viewHolder.country.text = dataSet[position].country.toString()
+                viewHolder.id = dataSet[position].id
+            }
+            
         // Return the size of your dataset (invoked by the layout manager)
         override fun getItemCount() = dataSet.size
 

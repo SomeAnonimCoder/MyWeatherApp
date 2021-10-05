@@ -134,19 +134,13 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:src="@drawable/sunrise"></ImageView>
 
                 <Space
                     android:layout_width="5dp"
                     android:layout_height="wrap_content"></Space>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sunrize"
-                    android:textSize="12sp"></TextView>
 
                 <TextView
                     android:id="@+id/sunrise"
@@ -170,19 +164,13 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:src="@drawable/sunset"></ImageView>
 
                 <Space
                     android:layout_width="5dp"
                     android:layout_height="wrap_content"></Space>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Sunset"
-                    android:textSize="12sp"></TextView>
 
                 <TextView
                     android:id="@+id/sunset"
@@ -206,19 +194,13 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:src="@drawable/humidity"></ImageView>
 
                 <Space
                     android:layout_width="5dp"
                     android:layout_height="wrap_content"></Space>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Humidity"
-                    android:textSize="12sp"></TextView>
 
                 <TextView
                     android:id="@+id/humidity"
@@ -252,19 +234,13 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:src="@drawable/wind"></ImageView>
 
                 <Space
                     android:layout_width="5dp"
                     android:layout_height="wrap_content"></Space>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="wind"
-                    android:textSize="12sp"></TextView>
 
                 <TextView
                     android:id="@+id/wind"
@@ -290,8 +266,8 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:src="@drawable/info"></ImageView>
 
                 <Space
@@ -301,7 +277,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Click for forecast"
+                    android:text="Forecast"
                     android:textSize="12sp"></TextView>
 
             </LinearLayout>
@@ -319,19 +295,13 @@
                 android:padding="8dp">
 
                 <ImageView
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:src="@drawable/pressure"></ImageView>
 
                 <Space
                     android:layout_width="5dp"
                     android:layout_height="wrap_content"></Space>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Pressure"
-                    android:textSize="12sp"></TextView>
 
                 <TextView
                     android:id="@+id/pressure"
