@@ -115,9 +115,7 @@ class SearchActivity : AppCompatActivity() {
          */
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val name = view.findViewById<TextView>(R.id.listitem_city_name)
-            val lon = view.findViewById<TextView>(R.id.listitem_lon)
             val country = view.findViewById<TextView>(R.id.listitem_country)
-            val lat = view.findViewById<TextView>(R.id.listitem_lat)
             var id=0
 
             init {
@@ -148,8 +146,6 @@ class SearchActivity : AppCompatActivity() {
                 // contents of the view with that element
                 viewHolder.name.text = dataSet[position].name
                 viewHolder.country.text = dataSet[position].country.toString()
-                viewHolder.lon.text = dataSet[position].lon.toString()
-                viewHolder.lat.text = dataSet[position].lat.toString()
                 viewHolder.id = dataSet[position].id
             }
 
