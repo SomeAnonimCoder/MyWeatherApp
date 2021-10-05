@@ -58,7 +58,7 @@ class ForecastActivity : AppCompatActivity() {
 
 
 
-        graphView = findViewById<GraphView>(R.id.graph)
+        graphView = findViewById(R.id.graph)
 
         // set time-style labels on X axis(instead of unix long)
         graphView.gridLabelRenderer.labelFormatter = object : DefaultLabelFormatter() {
@@ -71,10 +71,10 @@ class ForecastActivity : AppCompatActivity() {
             }
         }
 
-        hourlyForecastRecyclerView = findViewById<RecyclerView>(R.id.hourly_recycler_view)
+        hourlyForecastRecyclerView = findViewById(R.id.hourly_recycler_view)
         hourlyForecastRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        dailyForecastRecyclerView = findViewById<RecyclerView>(R.id.daily_recycler_view)
+        dailyForecastRecyclerView = findViewById(R.id.daily_recycler_view)
         dailyForecastRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
 
@@ -147,7 +147,7 @@ class ForecastActivity : AppCompatActivity() {
 
 
 
-        fun detDailyDataset(daily:JSONArray):ArrayList<DailyDataPoint>{
+        private fun detDailyDataset(daily:JSONArray):ArrayList<DailyDataPoint>{
             val result = ArrayList<DailyDataPoint>()
             for(i in 0 until daily.length()){
                 val element = daily.getJSONObject(i)
@@ -185,8 +185,8 @@ class ForecastActivity : AppCompatActivity() {
             return result
         }
 
-        fun getHourlyDataset(hourly: JSONArray): ArrayList<HourlyDataPoint> {
-            var result = ArrayList<HourlyDataPoint>()
+        private fun getHourlyDataset(hourly: JSONArray): ArrayList<HourlyDataPoint> {
+            val result = ArrayList<HourlyDataPoint>()
             for (i in 0 until hourly.length()){
                 val elem = hourly[i] as JSONObject
                 val date = Date(elem.getLong("dt")*1000)
@@ -201,9 +201,9 @@ class ForecastActivity : AppCompatActivity() {
             return result
         }
 
-        fun plot_graph(minutely:JSONArray){
+        private fun plot_graph(minutely:JSONArray){
 
-            var data = LineGraphSeries<DataPoint>()
+            val data = LineGraphSeries<DataPoint>()
             data.isDrawBackground = true
 
             for (i in 0 until minutely.length()){
@@ -213,7 +213,7 @@ class ForecastActivity : AppCompatActivity() {
             }
             graphView.title = "Rainfall, mm"
             // 20 sp, same as other forecast names, casted to px with density
-            graphView.titleTextSize = (20.0F*getResources().getDisplayMetrics().density) as Float
+            graphView.titleTextSize = (20.0F* resources.displayMetrics.density)
             graphView.titleColor = Color.parseColor("#EEEEEE")
             graphView.addSeries(data)
 
@@ -222,7 +222,7 @@ class ForecastActivity : AppCompatActivity() {
             }
             graphView.viewport.setMinY(data.lowestValueY)
             graphView.viewport.setMaxY(data.highestValueY+0.01)
-            graphView.getViewport().setYAxisBoundsManual(true);
+            graphView.viewport.isYAxisBoundsManual = true
 
         }
     }
@@ -231,7 +231,7 @@ class ForecastActivity : AppCompatActivity() {
     class HourlyForecastAdapter(private val dataSet: ArrayList<HourlyDataPoint>) :
         RecyclerView.Adapter<HourlyForecastAdapter.ViewHolder>() {
 
-        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {}
+        class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
         // Create new views (invoked by the layout manager)
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -252,16 +252,16 @@ class ForecastActivity : AppCompatActivity() {
             viewHolder.itemView.findViewById<TextView>(R.id.time).text = dtString
 
             val temp = dataPoint.temp
-            viewHolder.itemView.findViewById<TextView>(R.id.temp).text = temp.toString() + "°C"
+            viewHolder.itemView.findViewById<TextView>(R.id.temp).text = "$temp°C"
 
             val humidity = dataPoint.humidity
-            viewHolder.itemView.findViewById<TextView>(R.id.humidity).text = humidity.toString() + " %"
+            viewHolder.itemView.findViewById<TextView>(R.id.humidity).text = "$humidity %"
 
             val status = dataPoint.status
             viewHolder.itemView.findViewById<TextView>(R.id.status).text = status
 
             val wind = dataPoint.wind
-            viewHolder.itemView.findViewById<TextView>(R.id.wind).text = wind.toString()+" m/s"
+            viewHolder.itemView.findViewById<TextView>(R.id.wind).text = "$wind m/s"
 
         }
 
@@ -271,7 +271,7 @@ class ForecastActivity : AppCompatActivity() {
     }
 
     class DailyForecastAdapter(private val dailyDataset: ArrayList<DailyDataPoint>) : RecyclerView.Adapter<DailyForecastAdapter.ViewHolder>() {
-        class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {}
+        class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
         // Create new views (invoked by the layout manager)
         override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -279,7 +279,7 @@ class ForecastActivity : AppCompatActivity() {
             val view = LayoutInflater.from(viewGroup.context)
                 .inflate(R.layout.dayly_forecast_item, viewGroup, false)
 
-            return DailyForecastAdapter.ViewHolder(view)
+            return ViewHolder(view)
         }
 
 
@@ -290,36 +290,36 @@ class ForecastActivity : AppCompatActivity() {
             val timeFormatter = SimpleDateFormat("HH:mm", Locale.ENGLISH)
 
 
-            val dp = dailyDataset[position] as DailyDataPoint
+            val dp = dailyDataset[position]
             val time = dp.time
             v.findViewById<TextView>(R.id.time).text = dateFormatter.format(time)
 
             val morning = dp.morning
-            v.findViewById<TextView>(R.id.morning).text = morning.toString() + "°C"
+            v.findViewById<TextView>(R.id.morning).text = "$morning °C"
             val day = dp.day
-            v.findViewById<TextView>(R.id.day).text = day.toString() + "°C"
+            v.findViewById<TextView>(R.id.day).text = "$day°C"
             val evening = dp.evening
-            v.findViewById<TextView>(R.id.evening).text = evening.toString() + "°C"
+            v.findViewById<TextView>(R.id.evening).text = "$evening°C"
             val night = dp.night
-            v.findViewById<TextView>(R.id.night).text = night.toString() + "°C"
+            v.findViewById<TextView>(R.id.night).text = "$night°C"
 
             val morning_fl = dp.morning_fl
-            v.findViewById<TextView>(R.id.morning_sl).text = morning_fl.toString() + "°C"
+            v.findViewById<TextView>(R.id.morning_sl).text = "$morning_fl°C"
             val day_fl = dp.day_fl
-            v.findViewById<TextView>(R.id.day_sl).text = day_fl.toString() + "°C"
+            v.findViewById<TextView>(R.id.day_sl).text = "$day_fl°C"
             val evening_fl = dp.evening_fl
-            v.findViewById<TextView>(R.id.evening_sl).text = evening_fl.toString() + "°C"
+            v.findViewById<TextView>(R.id.evening_sl).text = "$evening_fl°C"
             val night_fl = dp.night_fl
-            v.findViewById<TextView>(R.id.night_sl).text = night_fl.toString() + "°C"
+            v.findViewById<TextView>(R.id.night_sl).text = "$night_fl°C"
 
             val pressure = dp.pressure
-            v.findViewById<TextView>(R.id.pressure).text = pressure.toString() + "gPa"
+            v.findViewById<TextView>(R.id.pressure).text = "$pressure gPa"
             val wind = dp.wind
-            v.findViewById<TextView>(R.id.wind).text = wind.toString() + "m/s"
+            v.findViewById<TextView>(R.id.wind).text = "$wind m/s"
             val humidity = dp.humidity
-            v.findViewById<TextView>(R.id.humidity).text = humidity.toString() + " %"
+            v.findViewById<TextView>(R.id.humidity).text = "$humidity %"
             val clouds = dp.clouds
-            v.findViewById<TextView>(R.id.clouds).text = clouds.toString() + " %"
+            v.findViewById<TextView>(R.id.clouds).text = "$clouds %"
             val status = dp.status
             v.findViewById<TextView>(R.id.status).text = status
 
