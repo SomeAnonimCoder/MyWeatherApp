@@ -71,92 +71,94 @@ class CurrentActivity : AppCompatActivity() {
             }
 
         @SuppressLint("CutPasteId")
-        override fun onPostExecute(result: String?) {
-            try {
-                super.onPostExecute(result)
-                val json = JSONObject(result!!)
-                val formatter = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+        override fun onPostExecute(result: String?) = try {
+            super.onPostExecute(result)
+            val json = JSONObject(result!!)
+            val formatter = SimpleDateFormat("HH:mm", Locale.ENGLISH)
 
-                val mainData = json.getJSONObject("main")
-                val sysData = json.getJSONObject("sys")
-                val windData = json.getJSONObject("wind")
-                val weatherData = json.getJSONArray("weather").getJSONObject(0)
+            val mainData = json.getJSONObject("main")
+            val sysData = json.getJSONObject("sys")
+            val windData = json.getJSONObject("wind")
+            val weatherData = json.getJSONArray("weather").getJSONObject(0)
 
-                val country = sysData.getString("country")
-                val cityName = json.getString("name")
-                val adressString = country.toString() + " : " + cityName.toString()
-                findViewById<TextView>(R.id.city_name).text = adressString
+            val country = sysData.getString("country")
+            val cityName = json.getString("name")
+            val adressString = "$country : $cityName"
+            findViewById<TextView>(R.id.city_name).text = adressString
 
-                val updateTime = Date(1000 * json.getLong("dt"))
-                val updatedAtString = "Updated at " + formatter.format(updateTime)
-                findViewById<TextView>(R.id.updated_at).text = updatedAtString
+            val updateTime = Date(1000 * json.getLong("dt"))
+            val updatedAtString = "Updated at " + formatter.format(updateTime)
+            findViewById<TextView>(R.id.updated_at).text = updatedAtString
 
-                val tempString = mainData.getString("temp") + "°C"
-                findViewById<TextView>(R.id.temp).text = tempString
+            val tempString = "${mainData.getString("temp")}°C"
+            findViewById<TextView>(R.id.temp).text = tempString
 
-                val feelsLike = mainData.getDouble("feels_like")
-                val feelsLikeString = "Feels like " + feelsLike.toString() + "°C"
-                findViewById<TextView>(R.id.feels_like).text = feelsLikeString
-
-
-                val windSpeed = windData.getDouble("speed")
-                val windSpeedString = windSpeed.toString() + " m/s"
-                findViewById<TextView>(R.id.wind).text = windSpeedString
-
-                val pressure = mainData.getInt("pressure")
-                val pressureString = pressure.toString() + " gPa"
-                findViewById<TextView>(R.id.pressure).text = pressureString
-
-                val humidity = mainData.getInt("humidity")
-                val humidityString = humidity.toString() + " %"
-                findViewById<TextView>(R.id.humidity).text = humidityString
-
-                val sunrise = sysData.getLong("sunrise")
-                val sunrizeString = formatter.format(Date(sunrise * 1000))
-                findViewById<TextView>(R.id.sunrise).text = sunrizeString
-
-                val sunset = sysData.getLong("sunset")
-                val sunsetString = formatter.format(Date(1000 * sunset))
-                findViewById<TextView>(R.id.sunset).text = sunsetString
-
-                //not used for now
-                //val weatherDescription = weatherData.getString("description")
-
-                val weatherStatus = weatherData.getString("main").uppercase() + "\n"+ weatherData.getString("description")
-                findViewById<TextView>(R.id.status).text = weatherStatus
-
-                val minTemp = mainData.getDouble("temp_min")
-                val minTempString = "Min temp " + minTemp.toString() + "°C"
-                findViewById<TextView>(R.id.temp_min).text = minTempString
-
-                val maxTemp = mainData.getDouble("temp_max")
-                val maxTempString = "Min temp " + maxTemp.toString() + "°C"
-                findViewById<TextView>(R.id.temp_max).text = maxTempString
+            val feelsLike = mainData.getDouble("feels_like")
+            val feelsLikeString = "Feels like $feelsLike°C"
+            findViewById<TextView>(R.id.feels_like).text = feelsLikeString
 
 
-                findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
-                findViewById<RelativeLayout>(R.id.main_container).visibility = View.VISIBLE
-                findViewById<TextView>(R.id.error_text).visibility = View.GONE
+            val windSpeed = windData.getDouble("speed")
+            val windSpeedString = "$windSpeed m/s"
+            findViewById<TextView>(R.id.wind).text = windSpeedString
 
-                val moreInfo = findViewById<LinearLayout>(R.id.more_layout)
-                moreInfo.setOnClickListener {
-                    val intent = Intent(
-                        it.context,
-                        ForecastActivity::class.java
-                    )
-                    val coords = json.getJSONObject("coord")
-                    intent.putExtra("lat", coords.getDouble("lat"))
-                    intent.putExtra("lon", coords.getDouble("lon"))
-                    intent.putExtra("city_name", cityName)
-                    intent.putExtra("country_name", country)
-                    ContextCompat.startActivity(it.context, intent, null)
-                }
+            val pressure = mainData.getInt("pressure")
+            val pressureString = "$pressure gPa"
+            findViewById<TextView>(R.id.pressure).text = pressureString
 
+            val humidity = mainData.getInt("humidity")
+            val humidityString = "$humidity %"
+            findViewById<TextView>(R.id.humidity).text = humidityString
+
+            val sunrise = sysData.getLong("sunrise")
+            val sunrizeString = formatter.format(Date(sunrise * 1000))
+            findViewById<TextView>(R.id.sunrise).text = sunrizeString
+
+            val sunset = sysData.getLong("sunset")
+            val sunsetString = formatter.format(Date(1000 * sunset))
+            findViewById<TextView>(R.id.sunset).text = sunsetString
+
+            //not used for now
+            //val weatherDescription = weatherData.getString("description")
+
+            val weatherStatus = """
+                ${
+                weatherData.getString("main").uppercase()
+            }\n${weatherData.getString("description")}
+                """.trimIndent()
+            findViewById<TextView>(R.id.status).text = weatherStatus
+
+            val minTemp = mainData.getDouble("temp_min")
+            val minTempString = "Min temp $minTemp°C"
+            findViewById<TextView>(R.id.temp_min).text = minTempString
+
+            val maxTemp = mainData.getDouble("temp_max")
+            val maxTempString = "Min temp $maxTemp°C"
+            findViewById<TextView>(R.id.temp_max).text = maxTempString
+
+
+            findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
+            findViewById<RelativeLayout>(R.id.main_container).visibility = View.VISIBLE
+            findViewById<TextView>(R.id.error_text).visibility = View.GONE
+
+            val moreInfo = findViewById<LinearLayout>(R.id.more_layout)
+            moreInfo.setOnClickListener {
+                val intent = Intent(
+                    it.context,
+                    ForecastActivity::class.java
+                )
+                val coords = json.getJSONObject("coord")
+                intent.putExtra("lat", coords.getDouble("lat"))
+                intent.putExtra("lon", coords.getDouble("lon"))
+                intent.putExtra("city_name", cityName)
+                intent.putExtra("country_name", country)
+                ContextCompat.startActivity(it.context, intent, null)
             }
-            catch (e:Exception){
-                findViewById<TextView>(R.id.error_text).visibility = View.GONE
-                findViewById<TextView>(R.id.error_text).text = e.localizedMessage
-            }
+
+        }
+        catch (e:Exception){
+            findViewById<TextView>(R.id.error_text).visibility = View.GONE
+            findViewById<TextView>(R.id.error_text).text = e.localizedMessage
         }
     }
 }

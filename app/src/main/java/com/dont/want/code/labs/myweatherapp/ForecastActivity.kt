@@ -252,16 +252,16 @@ class ForecastActivity : AppCompatActivity() {
             viewHolder.itemView.findViewById<TextView>(R.id.time).text = dtString
 
             val temp = dataPoint.temp
-            viewHolder.itemView.findViewById<TextView>(R.id.temp).text = temp.toString() + "°C"
+            viewHolder.itemView.findViewById<TextView>(R.id.temp).text = "$temp°C"
 
             val humidity = dataPoint.humidity
-            viewHolder.itemView.findViewById<TextView>(R.id.humidity).text = humidity.toString() + " %"
+            viewHolder.itemView.findViewById<TextView>(R.id.humidity).text = "$humidity %"
 
             val status = dataPoint.status
             viewHolder.itemView.findViewById<TextView>(R.id.status).text = status
 
             val wind = dataPoint.wind
-            viewHolder.itemView.findViewById<TextView>(R.id.wind).text = wind.toString()+" m/s"
+            viewHolder.itemView.findViewById<TextView>(R.id.wind).text = "$wind m/s"
 
         }
 
@@ -295,31 +295,31 @@ class ForecastActivity : AppCompatActivity() {
             v.findViewById<TextView>(R.id.time).text = dateFormatter.format(time)
 
             val morning = dp.morning
-            v.findViewById<TextView>(R.id.morning).text = morning.toString() + "°C"
+            v.findViewById<TextView>(R.id.morning).text = "$morning °C"
             val day = dp.day
-            v.findViewById<TextView>(R.id.day).text = day.toString() + "°C"
+            v.findViewById<TextView>(R.id.day).text = "$day°C"
             val evening = dp.evening
-            v.findViewById<TextView>(R.id.evening).text = evening.toString() + "°C"
+            v.findViewById<TextView>(R.id.evening).text = "$evening°C"
             val night = dp.night
-            v.findViewById<TextView>(R.id.night).text = night.toString() + "°C"
+            v.findViewById<TextView>(R.id.night).text = "$night°C"
 
             val morning_fl = dp.morning_fl
-            v.findViewById<TextView>(R.id.morning_sl).text = morning_fl.toString() + "°C"
+            v.findViewById<TextView>(R.id.morning_sl).text = "$morning_fl°C"
             val day_fl = dp.day_fl
-            v.findViewById<TextView>(R.id.day_sl).text = day_fl.toString() + "°C"
+            v.findViewById<TextView>(R.id.day_sl).text = "$day_fl°C"
             val evening_fl = dp.evening_fl
-            v.findViewById<TextView>(R.id.evening_sl).text = evening_fl.toString() + "°C"
+            v.findViewById<TextView>(R.id.evening_sl).text = "$evening_fl°C"
             val night_fl = dp.night_fl
-            v.findViewById<TextView>(R.id.night_sl).text = night_fl.toString() + "°C"
+            v.findViewById<TextView>(R.id.night_sl).text = "$night_fl°C"
 
             val pressure = dp.pressure
-            v.findViewById<TextView>(R.id.pressure).text = pressure.toString() + "gPa"
+            v.findViewById<TextView>(R.id.pressure).text = "${pressure} gPa"
             val wind = dp.wind
-            v.findViewById<TextView>(R.id.wind).text = wind.toString() + "m/s"
+            v.findViewById<TextView>(R.id.wind).text = "${wind} m/s"
             val humidity = dp.humidity
-            v.findViewById<TextView>(R.id.humidity).text = humidity.toString() + " %"
+            v.findViewById<TextView>(R.id.humidity).text = "$humidity %"
             val clouds = dp.clouds
-            v.findViewById<TextView>(R.id.clouds).text = clouds.toString() + " %"
+            v.findViewById<TextView>(R.id.clouds).text = "$clouds %"
             val status = dp.status
             v.findViewById<TextView>(R.id.status).text = status
 
