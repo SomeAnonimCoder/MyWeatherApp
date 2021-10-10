@@ -1,4 +1,4 @@
-package com.dont.want.code.labs.myweatherapp
+package com.dont.want.code.labs.myweatherapp.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -15,6 +15,8 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.dont.want.code.labs.myweatherapp.R
+import com.dont.want.code.labs.myweatherapp.databinding.ActivityCurrentBinding
 import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
@@ -25,8 +27,14 @@ class CurrentActivity : AppCompatActivity() {
     private var cityID: Int = 0
     private val apiKey: String = "42af006c49cad6fb2ae56af9fd967928"
 
+    private var _binding: ActivityCurrentBinding? = null
+    private val binding get() = _binding!!
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        _binding = ActivityCurrentBinding.inflate(layoutInflater)
 
         // lock orientation
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -40,7 +48,7 @@ class CurrentActivity : AppCompatActivity() {
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-        setContentView(R.layout.activity_current)
+        setContentView(binding.root)
 
         //remove ActionBar
         supportActionBar?.hide()
@@ -58,9 +66,9 @@ class CurrentActivity : AppCompatActivity() {
         // before loading data make main content gone and make spinner visible
         override fun onPreExecute() {
             super.onPreExecute()
-            findViewById<ProgressBar>(R.id.loader).visibility = View.VISIBLE
-            findViewById<RelativeLayout>(R.id.main_container).visibility = View.GONE
-            findViewById<TextView>(R.id.error_text).visibility = View.GONE
+            binding.loader.visibility = View.VISIBLE
+            binding.mainContainer.visibility = View.GONE
+            binding.errorText.visibility = View.GONE
         }
 
         // load data
@@ -96,38 +104,38 @@ class CurrentActivity : AppCompatActivity() {
                 val country = sysData.getString("country")
                 val cityName = json.getString("name")
                 val addressString = "$country : $cityName"
-                findViewById<TextView>(R.id.city_name).text = addressString
+                binding.cityName.text = addressString
 
                 val updateTime = Date(1000 * json.getLong("dt"))
                 val updatedAtString = "Updated at " + formatter.format(updateTime)
-                findViewById<TextView>(R.id.updated_at).text = updatedAtString
+                binding.updatedAt.text = updatedAtString
 
                 val tempString = "${mainData.getString("temp")}°C"
-                findViewById<TextView>(R.id.temp).text = tempString
+                binding.temp.text = tempString
 
                 val feelsLike = mainData.getDouble("feels_like")
                 val feelsLikeString = "Feels like $feelsLike°C"
-                findViewById<TextView>(R.id.feels_like).text = feelsLikeString
+                binding.feelsLike.text = feelsLikeString
 
                 val windSpeed = windData.getDouble("speed")
                 val windSpeedString = "$windSpeed m/s"
-                findViewById<TextView>(R.id.wind).text = windSpeedString
+                binding.wind.text = windSpeedString
 
                 val pressure = mainData.getInt("pressure")
                 val pressureString = "$pressure gPa"
-                findViewById<TextView>(R.id.pressure).text = pressureString
+                binding.pressure.text = pressureString
 
                 val humidity = mainData.getInt("humidity")
                 val humidityString = "$humidity %"
-                findViewById<TextView>(R.id.humidity).text = humidityString
+                binding.humidity.text = humidityString
 
                 val sunrise = sysData.getLong("sunrise")
-                val sunrizeString = formatter.format(Date(sunrise * 1000))
-                findViewById<TextView>(R.id.sunrise).text = sunrizeString
+                val sunriseString = formatter.format(Date(sunrise * 1000))
+                binding.sunrise.text = sunriseString
 
                 val sunset = sysData.getLong("sunset")
                 val sunsetString = formatter.format(Date(1000 * sunset))
-                findViewById<TextView>(R.id.sunset).text = sunsetString
+                binding.sunset.text = sunsetString
 
                 //not used for now
                 //val weatherDescription = weatherData.getString("description")
@@ -137,24 +145,24 @@ class CurrentActivity : AppCompatActivity() {
                     weatherData.getString("main").uppercase()
                 }\n${weatherData.getString("description")}
                 """.trimIndent()
-                findViewById<TextView>(R.id.status).text = weatherStatus
+                binding.status.text = weatherStatus
 
                 val minTemp = mainData.getDouble("temp_min")
                 val minTempString = "Min temp $minTemp°C"
-                findViewById<TextView>(R.id.temp_min).text = minTempString
+                binding.tempMin.text = minTempString
 
                 val maxTemp = mainData.getDouble("temp_max")
-                val maxTempString = "Min temp $maxTemp°C"
-                findViewById<TextView>(R.id.temp_max).text = maxTempString
+                val maxTempString = "Max temp $maxTemp°C"
+                binding.tempMax.text = maxTempString
             }
 
             // make main content visible and make spinner gone
-            findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
-            findViewById<RelativeLayout>(R.id.main_container).visibility = View.VISIBLE
-            findViewById<TextView>(R.id.error_text).visibility = View.GONE
+            binding.loader.visibility = View.GONE
+            binding.mainContainer.visibility = View.VISIBLE
+            binding.errorText.visibility = View.GONE
 
             // set onClickListener on "go to forecast" button
-            val forecastButton = findViewById<LinearLayout>(R.id.more_layout)
+            val forecastButton = binding.moreLayout
             forecastButton.setOnClickListener {
                 val intent = Intent(
                     it.context,
@@ -187,8 +195,8 @@ class CurrentActivity : AppCompatActivity() {
         }
         // if error - show error message and hide main content
         catch (e: Exception) {
-            findViewById<TextView>(R.id.error_text).visibility = View.GONE
-            findViewById<TextView>(R.id.error_text).text = e.localizedMessage
+            binding.errorText.visibility = View.GONE
+            binding.errorText.text = e.localizedMessage
         }
     }
 }
