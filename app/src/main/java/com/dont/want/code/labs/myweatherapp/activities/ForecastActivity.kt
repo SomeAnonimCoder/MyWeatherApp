@@ -1,4 +1,4 @@
-package com.dont.want.code.labs.myweatherapp
+package com.dont.want.code.labs.myweatherapp.activities
 
 import android.content.pm.ActivityInfo
 import android.graphics.Color
@@ -10,6 +10,9 @@ import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dont.want.code.labs.myweatherapp.R
+import com.dont.want.code.labs.myweatherapp.data.DailyDataPoint
+import com.dont.want.code.labs.myweatherapp.data.HourlyDataPoint
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.DefaultLabelFormatter
 import com.jjoe64.graphview.series.DataPoint
@@ -336,15 +339,5 @@ class ForecastActivity : AppCompatActivity() {
 
     }
 
-
-    data class HourlyDataPoint(val time:Date, val cityName:String, val country:String,
-                               val temp:Double, val humidity:Double, val status:String,
-                               val wind:Double)
-
-    data class DailyDataPoint(val time: Date,
-                              val morning:Double, val day:Double, val evening:Double, val night:Double,
-                              val morning_fl:Double, val day_fl:Double, val evening_fl:Double, val night_fl:Double,
-                              val pressure:Int, val wind:Double, var humidity:Double, val clouds:Double,
-                              val status: String, val sunset:Date, val sunrise:Date)
 
 }

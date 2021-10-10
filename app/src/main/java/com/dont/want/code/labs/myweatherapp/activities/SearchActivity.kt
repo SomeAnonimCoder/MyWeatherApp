@@ -1,4 +1,4 @@
-package com.dont.want.code.labs.myweatherapp
+package com.dont.want.code.labs.myweatherapp.activities
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dont.want.code.labs.myweatherapp.R
+import com.dont.want.code.labs.myweatherapp.data.City
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -31,7 +33,6 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var searchTextEdit: EditText
     private lateinit var cityRecyclerView: RecyclerView
 
-    data class City(val id: Int, val name: String, val country: String, val lon: Int, val lat: Int)
 
     override fun onCreate(savedInstanceState: Bundle?) {
 

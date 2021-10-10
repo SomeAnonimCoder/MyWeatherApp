@@ -1,4 +1,4 @@
-package com.dont.want.code.labs.myweatherapp
+package com.dont.want.code.labs.myweatherapp.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -15,6 +15,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.dont.want.code.labs.myweatherapp.R
 import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
