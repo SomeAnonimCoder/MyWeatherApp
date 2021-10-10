@@ -64,8 +64,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     app:srcCompat="@drawable/wind" />
 
                 <TextView
@@ -89,8 +89,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:layout_weight="10"
                     app:srcCompat="@drawable/humidity" />
 
@@ -116,8 +116,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:layout_weight="10"
                     app:srcCompat="@drawable/cloud" />
 
@@ -143,8 +143,8 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="35dp"
-                    android:layout_height="0dp"
+                    android:layout_width="@dimen/icons_size"
+                    android:layout_height="@dimen/icons_size"
                     android:layout_weight="10"
                     app:srcCompat="@drawable/temp" />
 
