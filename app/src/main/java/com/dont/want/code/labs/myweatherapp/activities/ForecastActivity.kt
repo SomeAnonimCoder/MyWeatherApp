@@ -1,5 +1,7 @@
-package com.dont.want.code.labs.myweatherapp
+package com.dont.want.code.labs.myweatherapp.activities
 
+import DatasetProvider.getHourlyDataset
+import DatasetProvider.getDailyDataset
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.AsyncTask
@@ -10,6 +12,10 @@ import android.view.*
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dont.want.code.labs.myweatherapp.R
+import com.dont.want.code.labs.myweatherapp.data.DailyDataPoint
+import com.dont.want.code.labs.myweatherapp.data.HourlyDataPoint
+import com.dont.want.code.labs.myweatherapp.databinding.ActivityCurrentBinding
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.DefaultLabelFormatter
 import com.jjoe64.graphview.series.DataPoint
@@ -34,9 +40,15 @@ class ForecastActivity : AppCompatActivity() {
     val apiKey:String = "42af006c49cad6fb2ae56af9fd967928"
     lateinit var hourlyForecastRecyclerView:RecyclerView
     lateinit var dailyForecastRecyclerView:RecyclerView
+
+    private var _binding: ActivityCurrentBinding? = null
+    private val binding get() = _binding!!
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        _binding = ActivityCurrentBinding.inflate(layoutInflater)
 
         // lock orientation
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -49,12 +61,11 @@ class ForecastActivity : AppCompatActivity() {
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-        setContentView(R.layout.activity_current)
+        setContentView(binding.root)
 
         supportActionBar?.hide()
 
 
-        setContentView(R.layout.activity_forecast)
 
 
 
@@ -108,13 +119,13 @@ class ForecastActivity : AppCompatActivity() {
             val result = JSONObject(result!!)
             val current = result.getJSONObject("current")
 
-            val locationTextView = findViewById<TextView>(R.id.city_name)
+            val locationTextView = binding.cityName
             locationTextView.text = cityName
 
             val formatter = SimpleDateFormat("HH:mm", Locale.ENGLISH)
             val updateTime = Date(1000 * current.getLong("dt"))
             val updatedAtString = "Updated at " + formatter.format(updateTime)
-            findViewById<TextView>(R.id.updated_at).text = updatedAtString
+           binding.updatedAt.text = updatedAtString
 
             // show minute rain forecast
             try {
@@ -140,66 +151,12 @@ class ForecastActivity : AppCompatActivity() {
             }
 
             val dailyJSON = result.getJSONArray("daily")
-            val dailyDataset = detDailyDataset(dailyJSON)
+            val dailyDataset = getDailyDataset(dailyJSON)
             dailyForecastRecyclerView.adapter = DailyForecastAdapter(dailyDataset)
             hourlyForecastRecyclerView.setHasFixedSize(true)
         }
 
 
-
-        private fun detDailyDataset(daily:JSONArray):ArrayList<DailyDataPoint>{
-            val result = ArrayList<DailyDataPoint>()
-            for(i in 0 until daily.length()){
-                val element = daily.getJSONObject(i)
-
-                val time = Date(element.getLong("dt")*1000)
-
-                val temp = element.getJSONObject("temp")
-                val mourning = temp.getDouble("morn")
-                val day = temp.getDouble("day")
-                val evening = temp.getDouble("eve")
-                val night = temp.getDouble("night")
-
-                val fl = element.getJSONObject("feels_like")
-                val mourning_fl = fl.getDouble("morn")
-                val day_fl = fl.getDouble("day")
-                val evening_fl = fl.getDouble("eve")
-                val night_fl = fl.getDouble("night")
-
-                val pressure = element.getInt("pressure")
-                val wind = element.getDouble("wind_speed")
-                val humidity = element.getDouble("humidity")
-                val clouds = element.getDouble("clouds")
-                val status = element.getJSONArray("weather").getJSONObject(0).getString("description")
-
-                val sunset = Date(element.getLong("sunset")*1000)
-                val sunrise = Date(element.getLong("sunrise")*1000)
-
-                val dp = DailyDataPoint(time,
-                    mourning, day, evening, night,
-                    mourning_fl, day_fl, evening_fl, night_fl,
-                    pressure, wind, humidity, clouds, status, sunset, sunrise
-                )
-                result.add(dp)
-            }
-            return result
-        }
-
-        private fun getHourlyDataset(hourly: JSONArray): ArrayList<HourlyDataPoint> {
-            val result = ArrayList<HourlyDataPoint>()
-            for (i in 0 until hourly.length()){
-                val elem = hourly[i] as JSONObject
-                val date = Date(elem.getLong("dt")*1000)
-                val temp = elem.getDouble("temp")
-                val humidity = elem.getDouble("humidity")
-                val status = (elem.getJSONArray("weather").get(0) as JSONObject).getString("description")
-                val wind = elem.getDouble("wind_speed")
-                val dp = HourlyDataPoint(date, cityName, country, temp,
-                    humidity, status, wind)
-                result.add(dp)
-            }
-            return result
-        }
 
         private fun plot_graph(minutely:JSONArray){
 
@@ -270,7 +227,8 @@ class ForecastActivity : AppCompatActivity() {
 
     }
 
-    class DailyForecastAdapter(private val dailyDataset: ArrayList<DailyDataPoint>) : RecyclerView.Adapter<DailyForecastAdapter.ViewHolder>() {
+    class DailyForecastAdapter(private val dailyDataset: ArrayList<DailyDataPoint>) :
+        RecyclerView.Adapter<DailyForecastAdapter.ViewHolder>() {
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
         // Create new views (invoked by the layout manager)
@@ -336,15 +294,5 @@ class ForecastActivity : AppCompatActivity() {
 
     }
 
-
-    data class HourlyDataPoint(val time:Date, val cityName:String, val country:String,
-                               val temp:Double, val humidity:Double, val status:String,
-                               val wind:Double)
-
-    data class DailyDataPoint(val time: Date,
-                              val morning:Double, val day:Double, val evening:Double, val night:Double,
-                              val morning_fl:Double, val day_fl:Double, val evening_fl:Double, val night_fl:Double,
-                              val pressure:Int, val wind:Double, var humidity:Double, val clouds:Double,
-                              val status: String, val sunset:Date, val sunrise:Date)
 
 }

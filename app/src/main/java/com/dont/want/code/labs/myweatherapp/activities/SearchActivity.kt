@@ -1,4 +1,4 @@
-package com.dont.want.code.labs.myweatherapp
+package com.dont.want.code.labs.myweatherapp.activities
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -15,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dont.want.code.labs.myweatherapp.R
+import com.dont.want.code.labs.myweatherapp.data.City
+import com.dont.want.code.labs.myweatherapp.databinding.ActivityCurrentBinding
+import com.dont.want.code.labs.myweatherapp.databinding.ActivitySearchBinding
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -31,9 +35,15 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var searchTextEdit: EditText
     private lateinit var cityRecyclerView: RecyclerView
 
-    data class City(val id: Int, val name: String, val country: String, val lon: Int, val lat: Int)
+
+    private var _binding: ActivitySearchBinding? = null
+    private val binding get() = _binding!!
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        _binding = ActivitySearchBinding.inflate(layoutInflater)
 
         // lock orientation
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -48,16 +58,16 @@ class SearchActivity : AppCompatActivity() {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
+        setContentView(binding.root)
 
-        searchTextEdit = findViewById(R.id.city_search)
-        cityRecyclerView = findViewById(R.id.city_list)
+        searchTextEdit = binding.citySearch
+        cityRecyclerView = binding.cityList
 
 
         supportActionBar?.hide()
 
-        searchContainer = findViewById(R.id.search_container)
-        progressBar = findViewById(R.id.progress_bar)
+        searchContainer = binding.searchContainer
+        progressBar = binding.progressBar
         CityListLoader().execute()
 
 
@@ -75,8 +85,8 @@ class SearchActivity : AppCompatActivity() {
 
         override fun doInBackground(vararg p0: Void?): Void? {
 
-            searchContainer = findViewById(R.id.search_container)
-            progressBar = findViewById(R.id.progress_bar)
+            searchContainer = binding.searchContainer
+            progressBar = binding.progressBar
 
             progressBar.visibility = View.VISIBLE
             searchContainer.visibility = View.GONE
