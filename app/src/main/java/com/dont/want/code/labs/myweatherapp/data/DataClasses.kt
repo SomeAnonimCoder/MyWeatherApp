@@ -3,7 +3,7 @@ package com.dont.want.code.labs.myweatherapp.data
 import java.util.*
 
 
-data class HourlyDataPoint(val time: Date, val cityName:String, val country:String,
+data class HourlyDataPoint(val time: Date,
                            val temp:Double, val humidity:Double, val status:String,
                            val wind:Double)
 
@@ -15,3 +15,4 @@ data class DailyDataPoint(val time: Date,
 )
 
 data class City(val id: Int, val name: String, val country: String, val lon: Int, val lat: Int)
+
