@@ -13,8 +13,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dont.want.code.labs.myweatherapp.R
-import com.dont.want.code.labs.myweatherapp.data.DailyDataPoint
-import com.dont.want.code.labs.myweatherapp.data.HourlyDataPoint
+import com.dont.want.code.labs.myweatherapp.data.models.DailyDataPoint
+import com.dont.want.code.labs.myweatherapp.data.models.HourlyDataPoint
 import com.dont.want.code.labs.myweatherapp.databinding.ActivityCurrentBinding
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.DefaultLabelFormatter

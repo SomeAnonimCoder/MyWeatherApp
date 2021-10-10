@@ -16,11 +16,10 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dont.want.code.labs.myweatherapp.R
-import com.dont.want.code.labs.myweatherapp.data.City
-import com.dont.want.code.labs.myweatherapp.databinding.ActivityCurrentBinding
+import com.dont.want.code.labs.myweatherapp.data.models.City
 import com.dont.want.code.labs.myweatherapp.databinding.ActivitySearchBinding
+import com.google.gson.Gson
 import org.json.JSONArray
-import org.json.JSONObject
 
 
 class SearchActivity : AppCompatActivity() {
@@ -96,15 +95,9 @@ class SearchActivity : AppCompatActivity() {
             val citiesList = JSONArray(jsonString)
             val cityObjectArray = ArrayList<City>()
             for (i in 0 until citiesList.length()) {
-                val city: JSONObject = citiesList[i] as JSONObject
+                val city = Gson().fromJson(citiesList[i].toString(), City::class.java)
                 cityObjectArray.add(
-                    City(
-                        city.getInt("id"),
-                        city.getString("name"),
-                        city.getString("country"),
-                        city.getJSONObject("coord").getDouble("lat").toInt(),
-                        city.getJSONObject("coord").getDouble("lon").toInt()
-                    )
+                    city
                 )
             }
 
@@ -185,12 +178,10 @@ class SearchActivity : AppCompatActivity() {
                 viewHolder.country.text = dataSet[position].country.toString()
                 viewHolder.id = dataSet[position].id
             }
-            
+
         // Return the size of your dataset (invoked by the layout manager)
         override fun getItemCount() = dataSet.size
-
     }
-
 }
 
 

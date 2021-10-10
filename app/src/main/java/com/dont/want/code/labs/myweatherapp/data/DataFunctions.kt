@@ -1,5 +1,5 @@
-import com.dont.want.code.labs.myweatherapp.data.DailyDataPoint
-import com.dont.want.code.labs.myweatherapp.data.HourlyDataPoint
+import com.dont.want.code.labs.myweatherapp.data.models.DailyDataPoint
+import com.dont.want.code.labs.myweatherapp.data.models.HourlyDataPoint
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.*

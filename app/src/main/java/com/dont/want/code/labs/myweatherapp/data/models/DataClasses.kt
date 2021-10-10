@@ -1,6 +1,9 @@
-package com.dont.want.code.labs.myweatherapp.data
+package com.dont.want.code.labs.myweatherapp.data.models
 
+import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
 import java.util.*
+import kotlin.collections.HashMap
 
 
 data class HourlyDataPoint(val time: Date,
@@ -14,5 +17,15 @@ data class DailyDataPoint(val time: Date,
                           val status: String, val sunset: Date, val sunrise: Date
 )
 
-data class City(val id: Int, val name: String, val country: String, val lon: Int, val lat: Int)
+
+@Serializable
+data class City(
+    @SerializedName("id")
+    val id: Int,
+
+    @SerializedName("name")
+    val name: String,
+
+    @SerializedName("country")
+    val country: String)
 
