@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dont.want.code.labs.myweatherapp.R
 import com.dont.want.code.labs.myweatherapp.data.DailyDataPoint
 import com.dont.want.code.labs.myweatherapp.data.HourlyDataPoint
+import com.dont.want.code.labs.myweatherapp.databinding.ActivityCurrentBinding
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.DefaultLabelFormatter
 import com.jjoe64.graphview.series.DataPoint
@@ -37,8 +38,15 @@ class ForecastActivity : AppCompatActivity() {
     val apiKey:String = "42af006c49cad6fb2ae56af9fd967928"
     lateinit var hourlyForecastRecyclerView:RecyclerView
     lateinit var dailyForecastRecyclerView:RecyclerView
+
+    private var _binding: ActivityCurrentBinding? = null
+    private val binding get() = _binding!!
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        _binding = ActivityCurrentBinding.inflate(layoutInflater)
 
 
         // lock orientation
@@ -52,12 +60,11 @@ class ForecastActivity : AppCompatActivity() {
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
-        setContentView(R.layout.activity_current)
+        setContentView(binding.root)
 
         supportActionBar?.hide()
 
 
-        setContentView(R.layout.activity_forecast)
 
 
 
@@ -111,13 +118,13 @@ class ForecastActivity : AppCompatActivity() {
             val result = JSONObject(result!!)
             val current = result.getJSONObject("current")
 
-            val locationTextView = findViewById<TextView>(R.id.city_name)
+            val locationTextView = binding.cityName
             locationTextView.text = cityName
 
             val formatter = SimpleDateFormat("HH:mm", Locale.ENGLISH)
             val updateTime = Date(1000 * current.getLong("dt"))
             val updatedAtString = "Updated at " + formatter.format(updateTime)
-            findViewById<TextView>(R.id.updated_at).text = updatedAtString
+           binding.updatedAt.text = updatedAtString
 
             // show minute rain forecast
             try {
